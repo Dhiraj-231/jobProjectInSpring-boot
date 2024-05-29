@@ -34,8 +34,9 @@ public class CompanyEntity {
     private String website;
     @Column(name = "Company_Description")
     private String description;
-    @JsonIgnore
+
     @OneToMany(mappedBy = "company")
+    @JsonIgnore
     private List<JobEntity> jobList;
     // list of Reviews of companies with one to many relationship
 }
