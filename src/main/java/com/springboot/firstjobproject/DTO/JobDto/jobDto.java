@@ -1,5 +1,7 @@
 package com.springboot.firstjobproject.DTO.JobDto;
 
+import com.springboot.firstjobproject.DTO.CompanyDto.companyDto;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,4 +18,5 @@ public class jobDto {
     private String minSalary;
     private String maxSalary;
     private String location;
+    private companyDto company;
 }

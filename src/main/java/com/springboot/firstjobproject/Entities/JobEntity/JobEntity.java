@@ -1,8 +1,13 @@
 package com.springboot.firstjobproject.Entities.JobEntity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.springboot.firstjobproject.Entities.CompanyEntity.CompanyEntity;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -22,15 +27,29 @@ public class JobEntity {
     @Column(name = "Job_Location")
     private String location;
 
+    @ManyToOne
+    @JoinColumn(name = "company_id", nullable = false)
+    @JsonIgnoreProperties("jobList")
+    private CompanyEntity company;
+
+    public CompanyEntity getCompany() {
+        return company;
+    }
+
+    public void setCompany(CompanyEntity company) {
+        this.company = company;
+    }
+
     // !SECTION- Entity constructor
-    public JobEntity(Long id, String tittle, String description, String minSalary, String maxSalary, String location) {
-        super();
-        this.Id = id;
+    public JobEntity(Long id, String tittle, String description, String minSalary, String maxSalary, String location,
+            CompanyEntity company) {
+        Id = id;
         this.tittle = tittle;
         this.description = description;
-        this.maxSalary = maxSalary;
         this.minSalary = minSalary;
+        this.maxSalary = maxSalary;
         this.location = location;
+        this.company = company;
     }
 
     public JobEntity() {
