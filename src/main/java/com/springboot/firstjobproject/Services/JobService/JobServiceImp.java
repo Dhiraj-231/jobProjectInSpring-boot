@@ -5,10 +5,12 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
 import org.springframework.stereotype.Service;
 
 import com.springboot.firstjobproject.DTO.JobDto.jobDto;
 import com.springboot.firstjobproject.Entities.JobEntity.JobEntity;
+import com.springboot.firstjobproject.Repository.CompanyRepository.CompanyRepository;
 import com.springboot.firstjobproject.Repository.JobRepository.jobRepository;
 
 @Service
@@ -16,10 +18,15 @@ public class JobServiceImp implements JobService {
 
     private final ModelMapper modelMapper;
     private final jobRepository jobRepository;
+    private final CompanyRepository companyRepository;
+    private Logger logger;
 
-    public JobServiceImp(ModelMapper modelMapper, jobRepository jobRepository) {
+    public JobServiceImp(ModelMapper modelMapper, jobRepository jobRepository, CompanyRepository companyRepository,
+            Logger logger) {
         this.modelMapper = modelMapper;
         this.jobRepository = jobRepository;
+        this.companyRepository = companyRepository;
+        this.logger = logger;
     }
 
     // !SECTION- get one job Post

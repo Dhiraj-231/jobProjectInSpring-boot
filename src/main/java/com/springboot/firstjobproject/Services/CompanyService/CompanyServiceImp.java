@@ -10,15 +10,19 @@ import org.springframework.stereotype.Service;
 import com.springboot.firstjobproject.DTO.CompanyDto.companyDto;
 import com.springboot.firstjobproject.Entities.CompanyEntity.CompanyEntity;
 import com.springboot.firstjobproject.Repository.CompanyRepository.CompanyRepository;
+import com.springboot.firstjobproject.Repository.JobRepository.jobRepository;
 
 @Service
 public class CompanyServiceImp implements CompanyService {
     private final ModelMapper modelMapper;
     private final CompanyRepository companyRepository;
+    private final jobRepository jobrepository;
 
-    public CompanyServiceImp(ModelMapper modelMapper, CompanyRepository companyRepository) {
+    public CompanyServiceImp(ModelMapper modelMapper, CompanyRepository companyRepository,
+            jobRepository jobrepository) {
         this.modelMapper = modelMapper;
         this.companyRepository = companyRepository;
+        this.jobrepository = jobrepository;
     }
 
     @Override
@@ -36,7 +40,9 @@ public class CompanyServiceImp implements CompanyService {
 
     @Override
     public companyDto createNewCompany(companyDto company) {
+
         CompanyEntity companyEntity = modelMapper.map(company, CompanyEntity.class);
+
         return modelMapper.map(companyRepository.save(companyEntity), companyDto.class);
     }
 

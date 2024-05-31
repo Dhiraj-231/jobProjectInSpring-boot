@@ -104,4 +104,10 @@ public class JobEntity {
     public void setLocation(String location) {
         this.location = location;
     }
+
+    @Override
+    public String toString() {
+        return "JobEntity [Id=" + Id + ", tittle=" + tittle + ", description=" + description + ", minSalary="
+                + minSalary + ", maxSalary=" + maxSalary + ", location=" + location + ", company=" + company + "]";
+    }
 }
