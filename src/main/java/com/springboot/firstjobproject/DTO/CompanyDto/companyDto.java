@@ -19,5 +19,6 @@ public class companyDto {
     private String email;
     private String website;
     private String description;
-    private List<Long> jobIds;
+    private List<jobDto> jobIds;
+
 }

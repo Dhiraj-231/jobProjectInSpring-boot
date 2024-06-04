@@ -2,9 +2,9 @@ package com.springboot.firstjobproject.Entities.CompanyEntity;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.springboot.firstjobproject.Entities.JobEntity.JobEntity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -35,8 +35,7 @@ public class CompanyEntity {
     @Column(name = "Company_Description")
     private String description;
 
-    @OneToMany(mappedBy = "company")
-    @JsonIgnore
+    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
     private List<JobEntity> jobList;
     // list of Reviews of companies with one to many relationship
 }

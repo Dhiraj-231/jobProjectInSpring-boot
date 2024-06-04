@@ -1,17 +1,28 @@
 package com.springboot.firstjobproject.Entities.JobEntity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.util.List;
 import com.springboot.firstjobproject.Entities.CompanyEntity.CompanyEntity;
+import com.springboot.firstjobproject.Entities.ReviewEntity.ReviewEntity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "job_details")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class JobEntity {
     @Id
     @Column(name = "Job_Id")
@@ -28,86 +39,10 @@ public class JobEntity {
     private String location;
 
     @ManyToOne
-    @JoinColumn(name = "company_id", nullable = false)
-    @JsonIgnoreProperties("jobList")
+    @JoinColumn(name = "company_id", referencedColumnName = "Company_Id")
     private CompanyEntity company;
 
-    public CompanyEntity getCompany() {
-        return company;
-    }
+    @OneToMany(mappedBy = "job", cascade = CascadeType.ALL)
+    private List<ReviewEntity> reviews;
 
-    public void setCompany(CompanyEntity company) {
-        this.company = company;
-    }
-
-    // !SECTION- Entity constructor
-    public JobEntity(Long id, String tittle, String description, String minSalary, String maxSalary, String location,
-            CompanyEntity company) {
-        Id = id;
-        this.tittle = tittle;
-        this.description = description;
-        this.minSalary = minSalary;
-        this.maxSalary = maxSalary;
-        this.location = location;
-        this.company = company;
-    }
-
-    public JobEntity() {
-        super();
-    }
-    // NOTE - getters and setters
-
-    public Long getId() {
-        return Id;
-    }
-
-    public void setId(Long id) {
-        Id = id;
-    }
-
-    public String getTittle() {
-        return tittle;
-    }
-
-    public void setTittle(String tittle) {
-        this.tittle = tittle;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getMaxSalary() {
-        return maxSalary;
-    }
-
-    public void setMaxSalary(String maxSalary) {
-        this.maxSalary = maxSalary;
-    }
-
-    public String getMinSalary() {
-        return minSalary;
-    }
-
-    public void setMinSalary(String minSalary) {
-        this.minSalary = minSalary;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    @Override
-    public String toString() {
-        return "JobEntity [Id=" + Id + ", tittle=" + tittle + ", description=" + description + ", minSalary="
-                + minSalary + ", maxSalary=" + maxSalary + ", location=" + location + ", company=" + company + "]";
-    }
 }

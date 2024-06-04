@@ -1,6 +1,8 @@
 package com.springboot.firstjobproject.DTO.JobDto;
 
-import com.springboot.firstjobproject.DTO.CompanyDto.companyDto;
+import java.util.List;
+
+import com.springboot.firstjobproject.DTO.ReviewDto.ReviewDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,5 +20,5 @@ public class jobDto {
     private String minSalary;
     private String maxSalary;
     private String location;
-    private companyDto company;
+    private List<ReviewDto> reviewList;
 }
